@@ -1,28 +1,28 @@
 <template>
   <section class="albums">
-    <a
-      v-for="album in albums"
+    <router-link
+      v-for="album in albumsList"
       :key="album.id"
-      :href="album.external_urls.spotify"
-      target="_blank"
+      :to="`/album/${album.id}`"
     >
       <figure>
         <img :src="album.images[1].url" :alt="album.name">
         <figcaption>
           <p>
-            <strong>{{ getArtists(album.artists) }}</strong>
+            <strong>{{ joinProperty(album.artists, "name") }}</strong>
           </p>
           <p>
             <i>{{ album.name }}</i>
           </p>
         </figcaption>
       </figure>
-    </a>
+    </router-link>
   </section>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import joinProperty from "@/util/joinProperty";
 
 export default {
   name: "AlbumsList",
@@ -36,7 +36,7 @@ export default {
     window.removeEventListener('scroll', this.handleScroll);
   },
   computed: mapState({
-    albums: state => state.spotify.albums,
+    albumsList: state => state.spotify.albumsList,
     isPaginationFinished: state => state.spotify.pagination.finished
   }),
   methods: {
@@ -46,14 +46,12 @@ export default {
         this.$store.dispatch("spotify/loadNewReleases");
       }
     },
-    getArtists(artists) {
-      return artists.map(({name}) => name).join(", ");
-    }
+    joinProperty
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .albums {
     display: grid;
     grid-auto-rows: 2fr;

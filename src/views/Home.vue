@@ -1,9 +1,9 @@
 <template>
   <div class="home">
     <a href="http://spotify.com/" target="_blank">
-      <img class="spotify-logo" :src="require('@/assets/spotify-logo.png')" alt="Spotify" />
+      <img :src="require('@/assets/spotify-logo.png')" alt="Spotify" />
     </a>
-    <h1 class="title">New releases</h1>
+    <h1>New releases</h1>
     <AlbumsList />
   </div>
 </template>
@@ -19,15 +19,15 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .home {
     padding-top: 1rem;
 
-    .spotify-logo {
+    img {
       max-width: 130px;
     }
 
-    .title {
+    h1 {
       margin-top: 0;
     }
   }
