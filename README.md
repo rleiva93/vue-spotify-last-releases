@@ -1,4 +1,4 @@
-# discover-movies
+# spotify-webapp
 
 ## Project setup
 ```

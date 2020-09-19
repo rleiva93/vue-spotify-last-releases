@@ -1,18 +1,19 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    {{ tracks }}
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import { mapState } from "vuex";
 
 export default {
   name: "Home",
-  components: {
-    HelloWorld
+  computed: mapState({
+    tracks: state => state.spotify.tracks
+  }),
+  created() {
+    this.$store.dispatch("spotify/getNewReleases");
   }
 };
 </script>
