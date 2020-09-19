@@ -2,14 +2,14 @@ import spotifyApi from "@/api/spotify";
 
 // initial state
 const state = () => ({
-  tracks: String,
+  albums: String,
   error: Boolean
 });
 
 // actions
 const actions = {
   getNewReleases({ commit }) {
-    spotifyApi()
+    spotifyApi.getNewReleases()
       .then(resp => commit("SET_NEW_RELEASES_LIST", resp))
       .catch(() => commit("SET_ERR_RELEASES_LIST"));
   }
@@ -17,8 +17,9 @@ const actions = {
 
 // mutations
 const mutations = {
-  SET_NEW_RELEASES_LIST(state, list) {
-    state.tracks = list;
+  SET_NEW_RELEASES_LIST(state, releasesList) {
+    const { data: { albums: { items } } } = releasesList;
+    state.albums = items;
   },
   SET_ERR_RELEASES_LIST(state) {
     state.error = true;

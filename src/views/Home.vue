@@ -1,6 +1,10 @@
 <template>
   <div class="home">
-    {{ tracks }}
+    <ul>
+      <li v-for="album in albums" :key="album.id">
+        {{ album.name }}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -10,7 +14,7 @@ import { mapState } from "vuex";
 export default {
   name: "Home",
   computed: mapState({
-    tracks: state => state.spotify.tracks
+    albums: state => state.spotify.albums
   }),
   created() {
     this.$store.dispatch("spotify/getNewReleases");

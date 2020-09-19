@@ -1,37 +1,23 @@
-import axios from "axios";
+import ApiService from "@/api/api-service";
+import {
+  SPOTIFY_API_AUTH_URL,
+  SPOTIFY_API_BASIC_TOKEN,
+  SPOTIFY_API_URL
+} from "@/api/config";
 
-const API_AUTH_URL = "https://accounts.spotify.com/api";
-const API_URL = "https://api.spotify.com/v1";
-const basicToken = btoa(
-  `${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`
-);
-
-async function getBearerToken() {
-  const tokenObject = await axios.post(
-    `${API_AUTH_URL}/token`,
-    "grant_type=client_credentials",
-    {
-      headers: {
-        Authorization: `Basic ${basicToken}`,
-        "Content-Type": "application/x-www-form-urlencoded"
-      }
-    }
-  );
-
-  return tokenObject;
+function spotifyClientAuth() {
+  ApiService.init(SPOTIFY_API_AUTH_URL);
+  ApiService.setAuthHeader("Basic", SPOTIFY_API_BASIC_TOKEN);
+  return ApiService.post("/token", "grant_type=client_credentials");
 }
 
-async function getNewReleases() {
-  const tokenObject = await getBearerToken();
-  const bearerToken = tokenObject.data.access_token;
+const spotifyApi = {
+  async getNewReleases() {
+    const { data: { access_token } } =  await spotifyClientAuth();
+    ApiService.init(SPOTIFY_API_URL);
+    ApiService.setAuthHeader("Bearer", access_token);
+    return ApiService.get("/browse/new-releases", "?offset=20&limit=50");
+  }
+};
 
-  const newReleases = await axios.get(`${API_URL}/browse/new-releases`, {
-    headers: {
-      Authorization: `Bearer ${bearerToken}`
-    }
-  });
-
-  return newReleases;
-}
-
-export default getNewReleases;
+export default spotifyApi;
