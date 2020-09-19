@@ -1,23 +1,17 @@
 <template>
   <div class="home">
-    <ul>
-      <li v-for="album in albums" :key="album.id">
-        {{ album.name }}
-      </li>
-    </ul>
+    <h1>Here is the official new album releases list from Spotify</h1>
+    <Albums />
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import Albums from "@/components/Albums";
 
 export default {
   name: "Home",
-  computed: mapState({
-    albums: state => state.spotify.albums
-  }),
-  created() {
-    this.$store.dispatch("spotify/getNewReleases");
+  components: {
+    Albums
   }
 };
 </script>

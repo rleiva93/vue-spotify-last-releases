@@ -11,15 +11,19 @@ const ApiService = {
   setAuthHeader(type, token) {
     Vue.axios.defaults.headers.common["Authorization"] = `${type} ${token}`;
   },
-  async get(resource, slug = "") {
+  get(resource, slug = "") {
     try {
       return Vue.axios.get(`${resource}/${slug}`);
     } catch (error) {
-      throw new Error(`[ERROR] ApiSpotify ${error}`);
+      throw new Error(`[ERROR GET] ApiService ${error}`);
     }
   },
   post(resource, params) {
-    return Vue.axios.post(`${resource}`, params);
+    try {
+      return Vue.axios.post(`${resource}`, params);
+    } catch (error) {
+      throw new Error(`[ERROR POST] ApiService ${error}`);
+    }
   }
 };
 

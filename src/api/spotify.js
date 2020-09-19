@@ -16,7 +16,7 @@ const spotifyApi = {
     const { data: { access_token } } =  await spotifyClientAuth();
     ApiService.init(SPOTIFY_API_URL);
     ApiService.setAuthHeader("Bearer", access_token);
-    return ApiService.get("/browse/new-releases", "?offset=20&limit=50");
+    return ApiService.get("/browse/new-releases", "?offset=20&limit=9");
   }
 };
 
