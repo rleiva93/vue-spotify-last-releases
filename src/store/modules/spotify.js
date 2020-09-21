@@ -3,7 +3,10 @@ import spotifyApi from "@/api/spotify";
 // initial state
 const state = () => ({
   albumsList: [],
-  album: {},
+  album: {
+    loaded: false,
+    data: {}
+  },
   pagination: {
     offset: 0,
     limit: 9,
@@ -44,7 +47,8 @@ const mutations = {
   },
   SET_ALBUM(state, album) {
     const { data } = album;
-    state.album = data;
+    state.album.loaded = true;
+    state.album.data = data;
   },
   SET_ERR_RELEASES_LIST(state) {
     state.error = true;

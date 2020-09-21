@@ -1,11 +1,9 @@
 <template>
-  <div class="home">
-    <a href="http://spotify.com/" target="_blank">
-      <img :src="require('@/assets/spotify-logo.png')" alt="Spotify" />
-    </a>
-    <h1>New releases</h1>
-    <AlbumsList />
-  </div>
+  <v-row class="home">
+    <v-col cols="12">
+      <AlbumsList />
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -18,17 +16,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-  .home {
-    padding-top: 1rem;
-
-    img {
-      max-width: 130px;
-    }
-
-    h1 {
-      margin-top: 0;
-    }
-  }
-</style>
