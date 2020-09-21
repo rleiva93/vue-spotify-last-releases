@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import AlbumImg from '@/components/AlbumImg';
 import AlbumData from '@/components/AlbumData';
 import AlbumTracksList from '@/components/AlbumTracksList';
@@ -25,10 +25,13 @@ export default {
     "album-tracks-list": AlbumTracksList
   },
   created() {
-    this.$store.dispatch("spotify/loadAlbum", this.$attrs.id);
+    this.loadAlbum(this.$attrs.id);
   },
   computed: mapState({
     album: (state) => state.spotify.album,
+  }),
+  methods: mapActions({
+    loadAlbum: "spotify/loadAlbum"
   })
 };
 </script>

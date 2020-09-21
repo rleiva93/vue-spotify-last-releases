@@ -47,8 +47,8 @@ const mutations = {
   },
   SET_ALBUM(state, album) {
     const { data } = album;
-    state.album.loaded = true;
     state.album.data = data;
+    state.album.loaded = true;
   },
   SET_ERR_RELEASES_LIST(state) {
     state.error = true;

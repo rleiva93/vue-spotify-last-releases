@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import AlbumFigure from "@/components/AlbumFigure";
 import isBottomOfWindow from "@/util/isBottomOfWindow";
 
@@ -18,17 +18,29 @@ export default {
   components: {
     "album-figure": AlbumFigure
   },
+  data: () => ({
+    isLoading: false,
+    lastOffset: Number
+  }),
   created() {
-    this.$store.dispatch("spotify/loadNewReleases");
+    this.loadNewReleases();
   },
   computed: mapState({
     albumsList: (state) => state.spotify.albumsList,
-    isPaginationFinished: (state) => state.spotify.pagination.finished,
+    pagination: (state) => state.spotify.pagination,
   }),
   methods: {
+    ...mapActions({
+      loadNewReleases: "spotify/loadNewReleases"
+    }),
     onScroll() {
-      if (isBottomOfWindow() && !this.isPaginationFinished) {
-        this.$store.dispatch("spotify/loadNewReleases");
+      if (
+        isBottomOfWindow() &&
+        !this.pagination.finished &&
+        this.lastOffset !== this.pagination.offset
+      ) {
+        this.loadNewReleases();
+        this.lastOffset = this.pagination.offset;
       }
     }
   }
