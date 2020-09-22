@@ -1,14 +1,13 @@
 <template>
-  <div class="album">
-    <div class="album-info" v-if="album.loaded">
+  <v-row class="album" v-if="album.loaded">
+    <v-col cols-xs="7" class="album-info">
       <album-img :album="album.data"></album-img>
-
-      <div class="col-data">
-        <album-data :album="album.data"></album-data>
-        <album-tracks-list :tracks="album.data.tracks.items"></album-tracks-list>
-      </div>
-    </div>
-  </div>
+    </v-col>
+    <v-col cols-xs="3">
+      <album-data :album="album.data"></album-data>
+      <album-tracks-list :tracks="album.data.tracks.items"></album-tracks-list>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -35,19 +34,3 @@ export default {
   })
 };
 </script>
-
-<style lang="scss" scoped>
-.album {
-  padding-top: 1rem;
-
-  .album-info {
-    display: grid;
-    grid-auto-rows: 2fr;
-    grid-template-columns: repeat(auto-fit, minmax(712px, 1fr));
-
-    .col-data {
-      text-align: left;
-    }
-  }
-}
-</style>

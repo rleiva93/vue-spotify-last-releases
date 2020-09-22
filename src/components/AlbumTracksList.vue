@@ -1,17 +1,30 @@
 <template>
   <div class="tracks">
-    <div class="track" v-for="track in tracks" :key="track.id" :track="track">
-      <div
+    <v-card
+      dark
+      class="track pa-4 mt-4 d-flex align-center"
+      v-for="track in tracks"
+      :key="track.id"
+    >
+      <v-btn
         class="play-btn"
         title="Listen a preview"
-        @click.prevent="playPreview(track.preview_url, $event)"
+        v-on:click.prevent.stop="playPreview(track.preview_url, $event)"
         :key="track.id"
         v-if="track.preview_url !== null"
-      ></div>
-      <a :href="track.external_urls.spotify" target="_blank">
+        dark
+      >
+        <audio :src="track.preview_url"></audio>
+        <i class="v-icon notranslate mdi theme--dark" :class="icons.play"></i>
+      </v-btn>
+      <a
+        :href="track.external_urls.spotify"
+        target="_blank"
+        class="text-decoration-none white--text pl-3"
+      >
         {{ track.name }}
       </a>
-    </div>
+    </v-card>
   </div>
 </template>
 
@@ -24,75 +37,58 @@ export default {
   data: () => ({
     activeAudio: {
       instance: new Audio(),
-      isPlaying: false,
       lastAudioClickedBtn: Object,
+    },
+    icons: {
+      play: "mdi-play",
+      pause: "mdi-pause",
     },
   }),
   methods: {
     playPreview(sound, event) {
       const currentAudio = this.activeAudio.instance;
-      const isPlaying = this.activeAudio.isPlaying;
-      const clickedBtn = event.target;
-      currentAudio.pause();
+      const isPlaying = !currentAudio.paused;
+      const clickedBtn = event.currentTarget.querySelector(".v-icon");
 
-      if (currentAudio.src === sound && !isPlaying) {
-        // Resume paused preview
-        currentAudio.play();
-        this.activeAudio.isPlaying = true;
-      } else if (currentAudio.src !== sound) {
-        // Play a different preview
-        if (isPlaying) {
-          this.activeAudio.lastAudioClickedBtn.classList.remove("pause");
-          currentAudio.pause();
-        }
+      if (currentAudio.src !== sound && isPlaying) {
+        currentAudio.pause();
         currentAudio.src = sound;
         currentAudio.play();
-        this.activeAudio.isPlaying = true;
+        this.handlePlayIconToggle(
+          this.lastAudioClickedBtn,
+          this.icons.pause,
+          this.icons.play
+        );
+        this.handlePlayIconToggle(
+          clickedBtn,
+          this.icons.play,
+          this.icons.pause
+        );
+      } else if (isPlaying) {
+        currentAudio.pause();
+        this.handlePlayIconToggle(
+          clickedBtn,
+          this.icons.pause,
+          this.icons.play
+        );
       } else {
-        this.activeAudio.isPlaying = false;
+        if (currentAudio.src !== sound) {
+          currentAudio.src = sound;
+        }
+        currentAudio.play();
+        this.handlePlayIconToggle(
+          clickedBtn,
+          this.icons.play,
+          this.icons.pause
+        );
       }
 
-      if (this.activeAudio.isPlaying) {
-        clickedBtn.classList.add("pause");
-      } else {
-        clickedBtn.classList.remove("pause");
-      }
-      this.activeAudio.lastAudioClickedBtn = clickedBtn;
+      this.lastAudioClickedBtn = clickedBtn;
+    },
+    handlePlayIconToggle(el, removeClass, addClass) {
+      el.classList.remove(removeClass);
+      el.classList.add(addClass);
     },
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.tracks {
-  margin-top: 1rem;
-
-  .track {
-    background: #282828;
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    max-width: 70%;
-    padding: 1rem;
-
-    .play-btn {
-      width: 44px;
-      height: 34px;
-      box-sizing: border-box;
-      border-style: solid;
-      border-width: 17px 0 17px 30px;
-      border-color: transparent transparent transparent #ffffff;
-      transition: all 100ms ease-in-out;
-
-      &.pause {
-        border-style: double;
-        border-width: 0 0 0 30px;
-      }
-    }
-    a {
-      color: #ffffff;
-      text-decoration: none;
-    }
-  }
-}
-</style>

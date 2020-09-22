@@ -8,7 +8,9 @@
         class="text-center"
         cols="12"
       >
-        {{ new Date().getFullYear() }} — <strong>Ricardo Leiva</strong>
+        <a href="https://github.com/rleiva93/spotify-webapp" target="_blank" class="text-decoration-none">
+          <v-icon dark>mdi-github</v-icon>
+        </a>
       </v-col>
     </v-footer>
   </v-card>

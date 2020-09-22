@@ -1,21 +1,9 @@
 <template>
   <div>
-    <p>
-      <strong>Artist:</strong>&nbsp;{{ joinProperty(album.artists, "name") }}
-    </p>
-    <p>
-      <strong>Album:</strong>&nbsp;{{ album.name }}
-    </p>
-    <p>
-      <small>
-        <i>{{ album.label }}</i>
-      </small>
-    </p>
-    <p>
-      <small>
-        <i>{{ album.release_date | formatDate }}</i>
-      </small>
-    </p>
+    <h1 class="pt-0">{{ joinProperty(album.artists, "name") }}</h1>
+    <h2>{{ album.name }}</h2>
+    <p class="caption">{{ album.label }}</p>
+    <p class="caption">{{ album.release_date | formatDate }}</p>
   </div>
 </template>
 
@@ -31,7 +19,7 @@ export default {
     joinProperty,
   },
   filters: {
-    formatDate: function(date) {
+    formatDate: (date) => {
       const albumDate = new Date(date);
       const now = new Date();
       const timeDifference = now.getTime() - albumDate.getTime();
@@ -51,9 +39,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-p {
-  margin: 0;
-}
-</style>
