@@ -3,7 +3,7 @@
     <v-col cols="12" xs="12" md="7" class="album-info">
       <album-img :album="album.data"></album-img>
     </v-col>
-    <v-col cols="12" xs="12" md="3">
+    <v-col cols="12" xs="12" md="5">
       <album-data :album="album.data"></album-data>
       <album-tracks-list :tracks="album.data.tracks.items"></album-tracks-list>
     </v-col>

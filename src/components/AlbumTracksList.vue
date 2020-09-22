@@ -86,6 +86,12 @@ export default {
         );
       }
 
+      currentAudio.onended = () =>
+        this.handlePlayIconToggle(
+          clickedBtn,
+          this.icons.pause,
+          this.icons.play
+        );
       this.lastAudioClickedBtn = clickedBtn;
     },
     handlePlayIconToggle(el, removeClass, addClass) {
