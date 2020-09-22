@@ -1,5 +1,5 @@
 <template>
-  <v-footer dark absolute class="font-weight-medium">
+  <v-footer dark fixed class="font-weight-medium">
     <v-col class="text-center" cols="12">
       <a
         href="https://github.com/rleiva93/spotify-webapp"

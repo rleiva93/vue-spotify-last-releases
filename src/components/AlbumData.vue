@@ -13,24 +13,24 @@ import joinProperty from "@/util/joinProperty";
 export default {
   name: "AlbumData",
   props: {
-    album: Object,
+    album: Object
   },
   methods: {
-    joinProperty,
+    joinProperty
   },
   filters: {
-    formatDate: (date) => {
+    formatDate: date => {
       const albumDate = new Date(date);
       const now = new Date();
       const timeDifference = now.getTime() - albumDate.getTime();
       const daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
       let releasedDate = "";
 
-      if(daysDifference === 0) {
+      if (daysDifference === 0) {
         releasedDate = "Today";
-      } else if(daysDifference === 1) {
+      } else if (daysDifference === 1) {
         releasedDate = `${daysDifference} day ago`;
-      } else if(daysDifference > 1) {
+      } else if (daysDifference > 1) {
         releasedDate = `${daysDifference} days ago`;
       }
 

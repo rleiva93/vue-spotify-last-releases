@@ -26,4 +26,11 @@ const router = new VueRouter({
   routes
 });
 
+const DEFAULT_TITLE = "Vue.js - Spotify New Releases";
+router.afterEach(to => {
+  Vue.nextTick(() => {
+    document.title = to.meta.title || DEFAULT_TITLE;
+  });
+});
+
 export default router;

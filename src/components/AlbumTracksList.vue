@@ -32,7 +32,7 @@
 export default {
   name: "AlbumTracksList",
   props: {
-    tracks: Array,
+    tracks: Array
   },
   beforeDestroy() {
     this.activeAudio.instance.pause();
@@ -40,12 +40,12 @@ export default {
   data: () => ({
     activeAudio: {
       instance: new Audio(),
-      lastAudioClickedBtn: Object,
+      lastAudioClickedBtn: Object
     },
     icons: {
       play: "mdi-play",
-      pause: "mdi-pause",
-    },
+      pause: "mdi-pause"
+    }
   }),
   methods: {
     playPreview(sound, event) {
@@ -91,7 +91,7 @@ export default {
     handlePlayIconToggle(el, removeClass, addClass) {
       el.classList.remove(removeClass);
       el.classList.add(addClass);
-    },
-  },
+    }
+  }
 };
 </script>

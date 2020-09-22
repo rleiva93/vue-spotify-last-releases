@@ -1,12 +1,15 @@
 <template>
   <v-row class="album" v-if="album.loaded">
-    <v-col cols-xs="7" class="album-info">
+    <v-col cols="12" xs="12" md="7" class="album-info">
       <album-img :album="album.data"></album-img>
     </v-col>
-    <v-col cols-xs="3">
+    <v-col cols="12" xs="12" md="3">
       <album-data :album="album.data"></album-data>
       <album-tracks-list :tracks="album.data.tracks.items"></album-tracks-list>
     </v-col>
+  </v-row>
+  <v-row v-else-if="albumError" class="justify-center">
+    <p class="red--text text-center">An error happened. Please try again.</p>
   </v-row>
   <v-row v-else>
     <v-progress-circular
@@ -20,9 +23,9 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import AlbumImg from '@/components/AlbumImg';
-import AlbumData from '@/components/AlbumData';
-import AlbumTracksList from '@/components/AlbumTracksList';
+import AlbumImg from "@/components/AlbumImg";
+import AlbumData from "@/components/AlbumData";
+import AlbumTracksList from "@/components/AlbumTracksList";
 
 export default {
   name: "Album",
@@ -38,11 +41,12 @@ export default {
     this.removeAlbum();
   },
   computed: mapState({
-    album: (state) => state.spotify.album,
+    album: state => state.spotify.album,
+    albumError: state => state.spotify.albumError
   }),
   methods: mapActions({
     loadAlbum: "spotify/loadAlbum",
-    removeAlbum: "spotify/removeAlbum",
+    removeAlbum: "spotify/removeAlbum"
   })
 };
 </script>

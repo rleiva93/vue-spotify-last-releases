@@ -14,15 +14,22 @@ function spotifyClientAuth() {
 
 const spotifyApi = {
   async getNewReleases(offset, limit) {
-    const { data: { access_token } } =  await spotifyClientAuth();
+    const {
+      data: { access_token }
+    } = await spotifyClientAuth();
 
     ApiService.init(SPOTIFY_API_URL);
     ApiService.setAuthHeader("Bearer", access_token);
 
-    return ApiService.get("/browse/new-releases", `?offset=${offset}&limit=${limit}`);
+    return ApiService.get(
+      "/browse/new-releases",
+      `?offset=${offset}&limit=${limit}`
+    );
   },
   async getAlbum(id) {
-    const { data: { access_token } } =  await spotifyClientAuth();
+    const {
+      data: { access_token }
+    } = await spotifyClientAuth();
 
     ApiService.init(SPOTIFY_API_URL);
     ApiService.setAuthHeader("Bearer", access_token);

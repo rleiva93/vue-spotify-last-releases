@@ -11,7 +11,9 @@ const state = () => ({
     offset: 0,
     limit: 9,
     finished: false
-  }
+  },
+  releasesListError: false,
+  albumError: false
 });
 
 const getters = {
@@ -22,12 +24,14 @@ const getters = {
 const actions = {
   loadNewReleases({ commit, getters }) {
     const { offset, limit } = getters.getPaginationData;
-    spotifyApi.getNewReleases(offset, limit)
+    spotifyApi
+      .getNewReleases(offset, limit)
       .then(resp => commit("SET_NEW_RELEASES_LIST", resp))
       .catch(() => commit("SET_ERR_RELEASES_LIST"));
   },
   loadAlbum({ commit }, albumId) {
-    spotifyApi.getAlbum(albumId)
+    spotifyApi
+      .getAlbum(albumId)
       .then(resp => commit("SET_ALBUM", resp))
       .catch(() => commit("SET_ERR_ALBUM"));
   },
@@ -39,9 +43,13 @@ const actions = {
 // mutations
 const mutations = {
   SET_NEW_RELEASES_LIST(state, releasesList) {
-    const { data: { albums: { items } } } = releasesList;
+    const {
+      data: {
+        albums: { items }
+      }
+    } = releasesList;
 
-    if(items.length > 0) {
+    if (items.length > 0) {
       state.albumsList.push(...items);
       state.pagination.offset += state.pagination.limit;
     } else {
@@ -58,10 +66,10 @@ const mutations = {
     state.album.loaded = false;
   },
   SET_ERR_RELEASES_LIST(state) {
-    state.error = true;
+    state.releasesListError = true;
   },
   SET_ERR_ALBUM(state) {
-    state.error = true;
+    state.albumError = true;
   }
 };
 
