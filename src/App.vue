@@ -26,6 +26,6 @@ export default {
 <style lang="scss">
 html,
 body {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 </style>
