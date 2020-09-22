@@ -22,10 +22,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-html,
-body {
-  overflow-x: hidden;
-}
-</style>
