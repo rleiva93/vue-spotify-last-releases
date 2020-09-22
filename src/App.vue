@@ -1,17 +1,11 @@
 <template>
   <v-app class="theme--dark">
     <v-main>
-      <v-container fluid class="pa-0">
-        <Header />
-      </v-container>
-
-      <v-container>
+      <Header />
+      <v-container class="mb-15">
         <router-view />
       </v-container>
-
-      <v-container fluid class="pa-0">
-        <Footer />
-      </v-container>
+      <Footer />
     </v-main>
   </v-app>
 </template>

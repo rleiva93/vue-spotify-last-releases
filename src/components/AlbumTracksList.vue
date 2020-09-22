@@ -34,6 +34,9 @@ export default {
   props: {
     tracks: Array,
   },
+  beforeDestroy() {
+    this.activeAudio.instance.pause();
+  },
   data: () => ({
     activeAudio: {
       instance: new Audio(),

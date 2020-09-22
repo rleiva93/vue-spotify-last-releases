@@ -1,10 +1,18 @@
 <template>
-  <v-row class="albums" v-scroll="onScroll">
+  <v-row v-if="albumsList.length > 0" class="albums" v-scroll.prevent.stop="onScroll">
     <v-col col-xs="3" v-for="album in albumsList" :key="album.id">
       <router-link :to="`/album/${album.id}`" class="text-decoration-none">
         <album-figure :album="album"></album-figure>
       </router-link>
     </v-col>
+  </v-row>
+  <v-row v-else>
+    <v-progress-circular
+      :size="70"
+      color="green"
+      class="mx-auto"
+      indeterminate
+    ></v-progress-circular>
   </v-row>
 </template>
 
@@ -19,7 +27,6 @@ export default {
     "album-figure": AlbumFigure
   },
   data: () => ({
-    isLoading: false,
     lastOffset: Number
   }),
   created() {

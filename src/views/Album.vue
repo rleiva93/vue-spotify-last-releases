@@ -8,6 +8,14 @@
       <album-tracks-list :tracks="album.data.tracks.items"></album-tracks-list>
     </v-col>
   </v-row>
+  <v-row v-else>
+    <v-progress-circular
+      :size="70"
+      color="green"
+      class="mx-auto"
+      indeterminate
+    ></v-progress-circular>
+  </v-row>
 </template>
 
 <script>
@@ -26,11 +34,15 @@ export default {
   created() {
     this.loadAlbum(this.$attrs.id);
   },
+  beforeDestroy() {
+    this.removeAlbum();
+  },
   computed: mapState({
     album: (state) => state.spotify.album,
   }),
   methods: mapActions({
-    loadAlbum: "spotify/loadAlbum"
+    loadAlbum: "spotify/loadAlbum",
+    removeAlbum: "spotify/removeAlbum",
   })
 };
 </script>

@@ -30,6 +30,9 @@ const actions = {
     spotifyApi.getAlbum(albumId)
       .then(resp => commit("SET_ALBUM", resp))
       .catch(() => commit("SET_ERR_ALBUM"));
+  },
+  removeAlbum({ commit }) {
+    commit("REMOVE_ALBUM");
   }
 };
 
@@ -49,6 +52,10 @@ const mutations = {
     const { data } = album;
     state.album.data = data;
     state.album.loaded = true;
+  },
+  REMOVE_ALBUM(state) {
+    state.album.data = {};
+    state.album.loaded = false;
   },
   SET_ERR_RELEASES_LIST(state) {
     state.error = true;
