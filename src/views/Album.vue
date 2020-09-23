@@ -9,13 +9,15 @@
     </v-col>
   </v-row>
   <v-row v-else-if="albumError" class="justify-center">
-    <p class="red--text text-center">An error happened. Please try again.</p>
+    <p class="error-msg red--text text-center">
+      An error happened. Please try again.
+    </p>
   </v-row>
   <v-row v-else>
     <v-progress-circular
       :size="70"
       color="green"
-      class="mx-auto"
+      class="loading mx-auto"
       indeterminate
     ></v-progress-circular>
   </v-row>

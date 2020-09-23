@@ -4,14 +4,21 @@
     class="albums"
     v-scroll.prevent.stop="onScroll"
   >
-    <v-col col-xs="3" v-for="album in albumsList" :key="album.id">
+    <v-col
+      class="album-card"
+      col-xs="3"
+      v-for="album in albumsList"
+      :key="album.id"
+    >
       <router-link :to="`/album/${album.id}`" class="text-decoration-none">
         <album-figure :album="album"></album-figure>
       </router-link>
     </v-col>
   </v-row>
   <v-row v-else-if="releasesListError" class="justify-center">
-    <p class="error-msg red--text text-center">An error happened. Please try again.</p>
+    <p class="error-msg red--text text-center">
+      An error happened. Please try again.
+    </p>
   </v-row>
   <v-row v-else>
     <v-progress-circular

@@ -23,7 +23,8 @@ const routes = [
   {
     // catch all 404
     path: "*",
-    component: () => import(/* webpackChunkName: "NotFound" */ "../views/NotFound.vue")
+    component: () =>
+      import(/* webpackChunkName: "NotFound" */ "../views/NotFound.vue")
   }
 ];
 

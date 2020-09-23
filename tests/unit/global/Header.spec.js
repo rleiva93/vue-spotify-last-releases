@@ -9,7 +9,7 @@ Vue.use(Vuetify);
 
 describe("Header.vue", () => {
   it("checks that the title is the rendered correctly", () => {
-    const wrapper = mount(Header, { stubs: ['router-link'] });
+    const wrapper = mount(Header, { stubs: ["router-link"] });
     expect(wrapper.text()).toMatch("New releases");
   });
 });
