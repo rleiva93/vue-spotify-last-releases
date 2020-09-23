@@ -1,6 +1,6 @@
 <template>
   <v-row
-    v-if="albumsList.length > 0"
+    v-if="albumsList && albumsList.length > 0"
     class="albums"
     v-scroll.prevent.stop="onScroll"
   >
@@ -11,13 +11,13 @@
     </v-col>
   </v-row>
   <v-row v-else-if="releasesListError" class="justify-center">
-    <p class="red--text text-center">An error happened. Please try again.</p>
+    <p class="error-msg red--text text-center">An error happened. Please try again.</p>
   </v-row>
   <v-row v-else>
     <v-progress-circular
       :size="70"
       color="green"
-      class="mx-auto"
+      class="loading mx-auto"
       indeterminate
     ></v-progress-circular>
   </v-row>

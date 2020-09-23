@@ -21,7 +21,7 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/Album.vue")
   },
   {
-    // catch all 404 - define at the very end
+    // catch all 404
     path: "*",
     component: () => import(/* webpackChunkName: "NotFound" */ "../views/NotFound.vue")
   }
