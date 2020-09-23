@@ -3,8 +3,8 @@
     <a :href="album.external_urls.spotify" target="_blank">
       <v-img
         :aspect-ratio="1"
-        :lazy-src="`${album.images[0].url}`"
-        :src="`${album.images[0].url}`"
+        :lazy-src="album.images[0].url"
+        :src="album.images[0].url"
         :alt="album.name"
         contain
       ></v-img>

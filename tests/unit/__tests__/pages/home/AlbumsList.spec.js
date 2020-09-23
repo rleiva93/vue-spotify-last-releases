@@ -11,7 +11,7 @@ import VueRouter from "vue-router";
 
 import AlbumsList from "@/components/AlbumsList.vue";
 import AlbumFigure from "@/components/AlbumFigure.vue";
-import mockAlbumObject from "../../util/mockAlbumObject";
+import mockAlbumsListObject from "../../util/mockAlbumsListObject";
 
 Vue.use(Vuetify);
 
@@ -46,7 +46,7 @@ describe("AlbumsList.vue", () => {
 
   enableAutoDestroy(afterEach);
 
-  it("checks initial state: loading icon shown, request for data dispatched", () => {
+  it("checks loading icon is shown and request is dispatched", () => {
     setupStore();
 
     const wrapper = mount(AlbumsList, { store, localVue });
@@ -62,8 +62,8 @@ describe("AlbumsList.vue", () => {
     expect(wrapper.find(".error-msg").exists()).toBeTruthy();
   });
 
-  it("checks that the albums container are displayed when data is available", async () => {
-    state.albumsList = mockAlbumObject;
+  it("checks that albums are displayed when data is available", () => {
+    state.albumsList = mockAlbumsListObject;
     state.releasesListError = false;
     setupStore(state);
 

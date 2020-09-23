@@ -4,7 +4,7 @@ import Vuetify from "vuetify";
 import VueRouter from "vue-router";
 
 import AlbumFigure from "@/components/AlbumFigure.vue";
-import mockAlbumObject from "../../util/mockAlbumObject";
+import mockAlbumsListObject from "../../util/mockAlbumsListObject";
 
 Vue.use(Vuetify);
 
@@ -13,9 +13,9 @@ localVue.use(VueRouter);
 localVue.use(Vuetify);
 
 describe("AlbumsFigure.vue", () => {
-  const albumObject = mockAlbumObject[0];
+  const albumObject = mockAlbumsListObject[0];
 
-  it("checks that the rendered text is the same of the mock object (prop) provided", () => {
+  it("checks that rendered data matchs props", () => {
     const wrapper = mount(AlbumFigure, {
       propsData: {
         album: albumObject
