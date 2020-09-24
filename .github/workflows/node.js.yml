@@ -5,25 +5,22 @@ name: Node.js
 
 on:
   push:
-    branches: [ master, develop ]
+    branches: [ develop ]
   pull_request:
-    branches: [ master, develop ]
+    branches: [ develop ]
 
 jobs:
   build:
-    name: Test
+    name: Run Unit Tests
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: borales/actions-yarn@v2.0.0
       with:
-        cmd: install # will run `yarn install` command
+        cmd: install
     - uses: borales/actions-yarn@v2.0.0
       with:
         cmd: install
     - uses: borales/actions-yarn@v2.0.0
       with:
         cmd: test:unit
-    - uses: borales/actions-yarn@v2.0.0
-      with:
-        cmd: test:e2e
