@@ -1,7 +1,7 @@
 <template>
   <header>
     <v-col class="text-center pt-5 pb-0" cols="12">
-      <router-link :to="`/`">
+      <router-link class="logo" :to="`/`">
         <img
           :src="require('@/assets/spotify-logo.png')"
           alt="Spotify"
