@@ -12,7 +12,7 @@ describe("Footer.vue", () => {
     const wrapper = mount(Footer, { stubs: ["router-link"] });
     const anchorHref = wrapper.find("a");
     expect(anchorHref.attributes("href")).toEqual(
-      "https://github.com/rleiva93/spotify-webapp"
+      "https://github.com/rleiva93/vue-spotify-last-releases"
     );
   });
 });
