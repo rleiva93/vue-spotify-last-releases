@@ -1,4 +1,4 @@
-# spotify-webapp
+# vue-spotify-last-releases
 
 ## Project setup
 ```
