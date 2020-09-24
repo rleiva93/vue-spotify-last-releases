@@ -12,7 +12,7 @@ describe("Homepage Test", () => {
       method: "GET",
       url: "https://api.spotify.com/v1/browse/new-releases/?offset=0&limit=9",
       status: 500,
-      response: {},
+      response: {}
     }).as("releases");
     cy.visit("/");
 
@@ -71,7 +71,7 @@ describe("Album detail Test", () => {
       method: "GET",
       url: "https://api.spotify.com/v1/albums/4F3rUFQcKJm6b1BsJRwAbf/",
       status: 500,
-      response: {},
+      response: {}
     }).as("albumMock");
     cy.visit("#/album/4F3rUFQcKJm6b1BsJRwAbf");
 
