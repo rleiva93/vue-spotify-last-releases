@@ -1,4 +1,4 @@
-# discover-movies
+# vue-spotify-last-releases
 
 ## Project setup
 ```
